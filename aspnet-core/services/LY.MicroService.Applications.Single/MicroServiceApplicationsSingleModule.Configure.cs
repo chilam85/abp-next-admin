@@ -539,6 +539,7 @@ public partial class MicroServiceApplicationsSingleModule
             var redisConfig = ConfigurationOptions.Parse(options.Configuration);
             options.ConfigurationOptions = redisConfig;
             options.InstanceName = configuration["Redis:InstanceName"];
+            //options.ConfigurationOptions.ConnectTimeout
         });
     }
 
@@ -627,6 +628,7 @@ public partial class MicroServiceApplicationsSingleModule
                     }
                 });
                 options.OperationFilter<TenantHeaderParamter>();
+                //options.OperationFilter<FormFileOperationFilter>();
             });
     }
 

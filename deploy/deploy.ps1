@@ -14,6 +14,7 @@ Write-host "root: " + $rootFolder
 Write-host "deploy middleware..."
 Set-Location $rootFolder
 docker-compose -f .\docker-compose.middleware.yml up -d --build
+return
 
 ## 等待30秒, 数据库初始化完成
 Write-host "initial database..."
