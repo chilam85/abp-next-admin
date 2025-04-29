@@ -47,7 +47,7 @@ public class AbpAspNetCoreMvcWrapperModule : AbpModule
             // api/abp/api-definition
             // options.IgnoreReturnTypes.Add<ApplicationApiDescriptionModel>();
             // api/abp/application-configuration
-            //  options.IgnoreReturnTypes.Add<ApplicationConfigurationDto>();
+              options.IgnoreReturnTypes.Add<ApplicationConfigurationDto>();
             // api/abp/application-localization
             // options.IgnoreReturnTypes.Add<ApplicationLocalizationDto>(); 
             // 文件流
@@ -67,7 +67,7 @@ public class AbpAspNetCoreMvcWrapperModule : AbpModule
             //options.IgnoreReturnTypes.Add<ForbidResult>();
 
             // options.IgnoreControllers.Add<AbpApplicationLocalizationController>();
-            // options.IgnoreControllers.Add<AbpApplicationConfigurationController>();
+             options.IgnoreControllers.Add<AbpApplicationConfigurationController>();
 
             // Api Endpoints
             options.IgnoreControllers.Add<AbpApiDefinitionController>();
