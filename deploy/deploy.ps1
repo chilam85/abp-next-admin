@@ -17,8 +17,9 @@ docker-compose -f .\docker-compose.middleware.yml up -d --build
 return
 
 ## 等待30秒, 数据库初始化完成
+## 性能不够30秒不够用, 这里设置为180秒
 Write-host "initial database..."
-Start-Sleep -Seconds 30
+Start-Sleep -Seconds 180
 ## 创建数据库
 Write-host "create database..."
 Set-Location $aspnetcorePath

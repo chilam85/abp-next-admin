@@ -1,3 +1,5 @@
+using LINGYUN.Abp.Authentication.QQ;
+using LINGYUN.Abp.Authentication.WeChat;
 using LINGYUN.Abp.Elsa.Designer;
 using LINGYUN.Abp.WeChat.Work.ExternalContact;
 
@@ -248,6 +250,9 @@ namespace LY.MicroService.Applications.Single;
     // 授权模块 组织机构集成
     typeof(AbpAuthorizationOrganizationUnitsModule),
 
+    typeof(AbpAuthenticationQQModule),
+    typeof(AbpAuthenticationWeChatModule),
+
     // 后台任务模块
     typeof(AbpBackgroundTasksModule),
     // 后台任务模块 行为处理
@@ -446,6 +451,7 @@ public partial class MicroServiceApplicationsSingleModule : AbpModule
 
     public async override Task OnPostApplicationInitializationAsync(ApplicationInitializationContext context)
     {
+        //在这里跑种子数据不是会拖慢启动速度吗？如果是照顾小白为何不连同DbMigrator一起跑？
         await context.ServiceProvider
             .GetRequiredService<IDataSeeder>()
             .SeedAsync();

@@ -156,11 +156,14 @@ public class ClientDataSeederContributor : IDataSeedContributor, ITransientDepen
         {
             if (await _applicationRepository.FindByClientIdAsync(internalServiceClientId) == null)
             {
+                //The client secret cannot be null or empty for a confidential application. Alternatively, a RSA or ECDSA key (with the key use "sig") can be added to the JSON Web Key Set attached to the application if the client authenticates using client assertions.
+                //ClientType指定为Confidential时，ClientSecret不能为空
+                //不要指定，如果ClientSecret为空则默认为Plulic，否则为Confidential类型
                 await _applicationManager.CreateAsync(new OpenIddictApplicationDescriptor
                 {
                     ClientId = internalServiceClientId,
                     ClientSecret = configurationSection["InternalService:ClientSecret"],
-                    ClientType = OpenIddictConstants.ClientTypes.Confidential,
+                    //ClientType = OpenIddictConstants.ClientTypes.Confidential,
                     ConsentType = OpenIddictConstants.ConsentTypes.Explicit,
                     ApplicationType = OpenIddictConstants.ApplicationTypes.Native,
                     DisplayName = "Abp Vue Admin Client",

@@ -17,10 +17,10 @@ docker volume rm redis-home
 docker volume create redis-home
 docker run --ip 172.18.0.50 -d --net nt -p 6379:6379 --name redis -v redis-home:/data redis
 
-docker pull docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+docker pull docker.elastic.co/elasticsearch/elasticsearch:8.17.2
 docker volume rm elasticsearch-home
 docker volume create elasticsearch-home
-docker run --ip 172.18.0.60 -d --name es --net nt -v elasticsearch-home:/usr/share/elasticsearch/data -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms1G -Xmx1G"  -e xpack.security.enabled=false  -p 9200:9200 -p 9300:9300 -it docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+docker run --ip 172.18.0.60 -d --name es --net nt -v elasticsearch-home:/usr/share/elasticsearch/data -e "discovery.type=single-node" -e ES_JAVA_OPTS="-Xms1G -Xmx1G"  -e xpack.security.enabled=false  -p 9200:9200 -p 9300:9300 -it docker.elastic.co/elasticsearch/elasticsearch:8.17.2
 
-docker pull docker.elastic.co/kibana/kibana:8.9.0
-docker run --ip 172.18.0.70 -d --name kib --net nt -p 5601:5601 docker.elastic.co/kibana/kibana:8.9.0
+docker pull docker.elastic.co/kibana/kibana:8.17.2
+docker run --ip 172.18.0.70 -d --name kib --net nt -p 5601:5601 docker.elastic.co/kibana/kibana:8.17.2

@@ -104,7 +104,7 @@ class AbpUserManager extends UserManager {
       password: params.password,
       grant_type: 'password',
       client_id: this.settings.client_id,
-      client_secret,
+      client_secret: '', // 在前端采用传统的用户名密码登录时（client_type为public），client_secret必须不传或传空值
     });
     this._writeUserId(body, params);
     this._writeTwoFactorToken(body, params);

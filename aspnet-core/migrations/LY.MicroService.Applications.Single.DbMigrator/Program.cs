@@ -30,12 +30,22 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
-            .AddAppSettingsSecretsJson()
-            // .ConfigureAppConfiguration((context, builder) =>
-            // {
-            //     builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-            //         .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
-            // }  )
+             .AddAppSettingsSecretsJson()
+             .ConfigureAppConfiguration((context, builder) =>
+             {
+                 // 先手动加载基础配置文件（必须在读取前加！）
+                 var env = context.HostingEnvironment;
+                 builder.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                 builder.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+                 // 需要“重新构建”一次 IConfiguration 才能读取刚加的值
+                 var tempConfig = builder.Build();
+                 var dbProvider = tempConfig["AppVariables:DataBaseProvider"];
+                 if (!string.IsNullOrEmpty(dbProvider))
+                 {
+                     builder.AddJsonFile($"appsettings.{dbProvider}.json", optional: true, reloadOnChange: true);
+                 }
+             })
             .ConfigureLogging((context, logging) => logging.ClearProviders())
             .ConfigureServices((hostContext, services) =>
             {

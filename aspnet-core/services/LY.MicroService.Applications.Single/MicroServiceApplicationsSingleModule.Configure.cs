@@ -72,6 +72,14 @@ public partial class MicroServiceApplicationsSingleModule
                 options.UseDataProtection();
             });
         });
+
+        // 已由 AbpOpenIddictWeChatModule 自动调用 AllowWeChatFlow()
+        // 无需手动写 PreConfigure<OpenIddictServerBuilder>
+        //PreConfigure<OpenIddictServerBuilder>(builder =>
+        //{
+        //    // 允许微信认证流程
+        //    builder.AllowWeChatFlow();
+        //});
     }
 
     private void PreConfigureIdentity()

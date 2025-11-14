@@ -13,18 +13,22 @@ namespace LY.MicroService.Applications.Single.EntityFrameworkCore.DataSeeder;
 /// 这里采用在EntityFrameworkCoreModule中注册work的方式解决问题到底是不是正常的做法，
 /// DbMigrator是否引入任务模块，引入有点重?不引入DbMigrator不会执行work生成种子数据?
 /// 如果是正常做法，为何运行DbMigrator不会执行work生成种子数据，要等到主项目运行才执行work
+/// 
+/// 之前初始化种子数据失败是因为报错了，现在确定执行DbMigrator项目可以迁移数据库。
+/// 并且在项目Module类的OnPostApplicationInitializationAsync方法也有调用种子初始化
+/// 这个类便没有意义了，看了一下提交历史，作者也删除了此类
 /// </summary>
-public class ApplicationSingleDataSeederWorker : BackgroundService
-{
-    protected IDataSeeder DataSeeder { get; }
+//public class ApplicationSingleDataSeederWorker : BackgroundService
+//{
+//    protected IDataSeeder DataSeeder { get; }
 
-    public ApplicationSingleDataSeederWorker(IDataSeeder dataSeeder)
-    {
-        DataSeeder = dataSeeder;
-    }
+//    public ApplicationSingleDataSeederWorker(IDataSeeder dataSeeder)
+//    {
+//        DataSeeder = dataSeeder;
+//    }
 
-    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
-    {
-        await DataSeeder.SeedAsync();
-    }
-}
+//    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+//    {
+//        await DataSeeder.SeedAsync();
+//    }
+//}

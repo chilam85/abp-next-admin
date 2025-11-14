@@ -11,12 +11,32 @@
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/colinin/abp-next-admin</RepositoryUrl>
 		<GeneratePackageOnBuild Condition="$(AssemblyName.StartsWith('LINGYUN'))">true</GeneratePackageOnBuild>
+    <!-- 包含符号包 begin-->
+    <!-- <IncludeSymbols Condition="$(AssemblyName.StartsWith('LINGYUN'))">true</IncludeSymbols>     -->
+    <!-- <SymbolPackageFormat Condition="$(AssemblyName.StartsWith('LINGYUN'))">snupkg</SymbolPackageFormat> -->
+    <!-- 包含符号包 end-->
+
+    <!--将源代码直接嵌入到PDB文件中 begin-->
+    <!-- <EmbedAllSources Condition="$(AssemblyName.StartsWith('LINGYUN'))">true</EmbedAllSources> -->
+    <!-- 将PDB文件包含到NuGet包 -->
+    <!-- <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="$(AssemblyName.StartsWith('LINGYUN'))">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder> -->
+    <!--将源代码直接嵌入到PDB文件中 end-->
+
+    <!--配置Source Link begin-->
+    <!-- <PublishRepositoryUrl Condition="$(AssemblyName.StartsWith('LINGYUN'))">true</PublishRepositoryUrl> -->
+    <!-- <EmbedUntrackedSources Condition="$(AssemblyName.StartsWith('LINGYUN'))">true</EmbedUntrackedSources> -->
+    <!-- 可选：生成可移植PDB（推荐） -->
+    <!-- <DebugType Condition="$(AssemblyName.StartsWith('LINGYUN'))">portable</DebugType> -->
+    <!--配置Source Link end-->
 	</PropertyGroup>
 	
 	<ItemGroup>
 		<Compile Remove="LocalNuget\**" />
 		<EmbeddedResource Remove="LocalNuget\**" />
 		<None Remove="LocalNuget\**" />
+    <!--引用对应源代码管理系统的Source Link包 begin-->
+    <!-- <PackageReference Include="Microsoft.SourceLink.GitHub" Version="最新版本" PrivateAssets="All" Condition="$(AssemblyName.StartsWith('LINGYUN'))" /> -->
+    <!--引用对应源代码管理系统的Source Link包 end-->
 	</ItemGroup>
 
 	<ItemGroup>
