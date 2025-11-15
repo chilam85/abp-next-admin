@@ -115,6 +115,7 @@
 	<ItemGroup>
 		<PackageReference Include="LINGYUN.Abp.Account.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.Account.Application" />
+		<PackageReference Include="LINGYUN.Abp.Account.Emailing" />
 		<PackageReference Include="LINGYUN.Abp.Account.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.Account.Templates" />
 		<PackageReference Include="LINGYUN.Abp.Auditing.Application.Contracts" />
@@ -203,8 +204,8 @@
 		<PackageReference Include="LINGYUN.Abp.OssManagement.Domain.Shared" />
 		<PackageReference Include="LINGYUN.Abp.OssManagement.Domain" />
 		<PackageReference Include="LINGYUN.Abp.OssManagement.FileSystem" />
-<!--		<PackageReference Include="LINGYUN.Abp.OssManagement.Imaging" />-->
-<!--		<PackageReference Include="LINGYUN.Abp.OssManagement.Minio" />-->
+		<PackageReference Include="LINGYUN.Abp.OssManagement.Imaging" />
+		<PackageReference Include="LINGYUN.Abp.OssManagement.Minio" />
 		<PackageReference Include="LINGYUN.Abp.OssManagement.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.OssManagement.SettingManagement" />
 		<PackageReference Include="LINGYUN.Abp.PermissionManagement.Application" />

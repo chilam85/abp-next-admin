@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "LY.MicroService.Applications.Single": {
+    "LY.AIO.Applications.Single": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
@@ -17,11 +17,11 @@
         "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
-    "LY.MicroService.Applications.Single.Development": {
+    "LY.AIO.Applications.Single.Development": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://0.0.0.0:30000",
+      "applicationUrl": "http://0.0.0.0:30001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -66,7 +66,8 @@ using LINGYUN.Abp.OpenIddict.WeChat;
 using LINGYUN.Abp.OpenIddict.WeChat.Work;
 using LINGYUN.Abp.OssManagement;
 using LINGYUN.Abp.OssManagement.FileSystem;
-// using LINGYUN.Abp.OssManagement.Imaging;
+using LINGYUN.Abp.OssManagement.Minio;
+using LINGYUN.Abp.OssManagement.Imaging;
 using LINGYUN.Abp.OssManagement.SettingManagement;
 using LINGYUN.Abp.PermissionManagement;
 using LINGYUN.Abp.PermissionManagement.HttpApi;
@@ -126,6 +127,7 @@ using Volo.Abp.Threading;
 // using LINGYUN.Abp.Elsa.EntityFrameworkCore.MySql;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 
+
 namespace LY.AIO.Applications.Single;
 
 [DependsOn(
@@ -175,9 +177,9 @@ namespace LY.AIO.Applications.Single;
     typeof(AbpOpenIddictWeChatModule),
     typeof(AbpOpenIddictWeChatWorkModule),
 
-    //typeof(AbpOssManagementMinioModule), // 取消注释以使用Minio
+    typeof(AbpOssManagementMinioModule), // 取消注释以使用Minio
     typeof(AbpOssManagementFileSystemModule),
-    // typeof(AbpOssManagementImagingModule),
+    typeof(AbpOssManagementImagingModule),
     typeof(AbpOssManagementDomainModule),
     typeof(AbpOssManagementApplicationModule),
     typeof(AbpOssManagementHttpApiModule),
@@ -296,6 +298,8 @@ namespace LY.AIO.Applications.Single;
     typeof(AbpWeChatOfficialHandlersModule),
     typeof(AbpWeChatWorkHandlersModule),
     typeof(AbpWeChatSettingManagementModule),
+
+    //typeof(AbpAccountApplicationContractsModule),
 
     typeof(AbpDataDbMigratorModule),
     typeof(AbpIdGeneratorModule),
