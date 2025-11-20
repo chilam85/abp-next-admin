@@ -10,6 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="openiddict.pfx" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AgileConfig.Client" />
 		<PackageReference Include="DistributedLock.Redis" />
 		<PackageReference Include="DotNetCore.CAP.Dashboard" />
@@ -282,6 +286,10 @@
 
 	<ItemGroup>
 	  <Folder Include="Logs\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Include="openiddict.pfx" />
 	</ItemGroup>
 
 </Project>
