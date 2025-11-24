@@ -5,11 +5,13 @@
 		<ElsaNextPackageVersion>3.3.5</ElsaNextPackageVersion>
 		<VoloAbpPackageVersion>9.3.6</VoloAbpPackageVersion>
 		<LINGYUNAbpPackageVersion>9.3.6</LINGYUNAbpPackageVersion>
+		<NetStandardVersion>2.0.3</NetStandardVersion>
 		<MicrosoftExtensionsPackageVersion>9.0.6</MicrosoftExtensionsPackageVersion>
 		<MicrosoftAspNetCorePackageVersion>9.0.6</MicrosoftAspNetCorePackageVersion>
 		<MicrosoftEntityFrameworkCorePackageVersion>9.0.6</MicrosoftEntityFrameworkCorePackageVersion>
 		<MicrosoftDataPackageVersion>9.0.6</MicrosoftDataPackageVersion>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+		<CentralPackageFloatingVersionsEnabled>true</CentralPackageFloatingVersionsEnabled>
 		<!-- 防止间接依赖引入意外版本 -->
 		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
 	</PropertyGroup>
@@ -155,6 +157,7 @@
 	</ItemGroup>
 	<!-- .NET -->
 	<ItemGroup>
+		<!--<PackageVersion Include="NETStandard.Library" Version="$(NetStandardVersion)" />-->
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(MicrosoftAspNetCorePackageVersion)" />
 		<PackageVersion Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="$(MicrosoftAspNetCorePackageVersion)" />
 		<PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(MicrosoftAspNetCorePackageVersion)" />
@@ -203,9 +206,16 @@
 		<PackageVersion Include="Elsa.WorkflowSettings.Persistence.EntityFramework.PostgreSql" Version="$(ElsaPackageVersion)" />
 		<PackageVersion Include="Elsa.Webhooks.Persistence.EntityFramework.SqlServer" Version="$(ElsaPackageVersion)" />
 		<PackageVersion Include="Elsa.WorkflowSettings.Persistence.EntityFramework.SqlServer" Version="$(ElsaPackageVersion)" />
+	    
 	</ItemGroup>
 	<!-- Elsa Next-->
 	<ItemGroup>
+		<PackageVersion Include="Elsa.CSharp" Version="$(ElsaNextPackageVersion)" />
+		<PackageVersion Include="Elsa.Identity" Version="$(ElsaNextPackageVersion)" />
+		<PackageVersion Include="Elsa.Scheduling" Version="$(ElsaNextPackageVersion)" />
+		<PackageVersion Include="Elsa.Workflows.Api" Version="$(ElsaNextPackageVersion)" />
+		<PackageVersion Include="Elsa.EntityFrameworkCore" Version="$(ElsaNextPackageVersion)" />
+		<PackageVersion Include="Elsa.EntityFrameworkCore.Sqlite" Version="$(ElsaNextPackageVersion)" />
 		<PackageVersion Include="Elsa.Api.Client" Version="$(ElsaNextPackageVersion)" />
 		<PackageVersion Include="Elsa.Studio" Version="$(ElsaNextPackageVersion)" />
 		<PackageVersion Include="Elsa.Studio.Core.BlazorServer" Version="$(ElsaNextPackageVersion)" />
@@ -388,13 +398,14 @@
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Official.Application" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Official.HttpApi" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.SettingManagement" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.WeChat.Work.ExternalContact" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Work.Application" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Work.Handlers" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Work.HttpApi" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat.Work" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WeChat" Version="$(LINGYUNAbpPackageVersion)" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
 		<PackageVersion Include="LINGYUN.Abp.Account.Application.Contracts" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.Account.Application" Version="$(LINGYUNAbpPackageVersion)" />
@@ -543,5 +554,31 @@
 		<PackageVersion Include="LINGYUN.Abp.WebhooksManagement.EntityFrameworkCore" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.WebhooksManagement.HttpApi" Version="$(LINGYUNAbpPackageVersion)" />
 		<PackageVersion Include="LINGYUN.Abp.Webhooks" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Claims.Mapping" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Account.Web.OAuth" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Account.Web.OpenIddict" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.AuditLogging.IP.Location" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Demo.Application" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Demo.EntityFrameworkCore" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Demo.HttpApi" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Elsa.Designer" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.EventBus.CAP" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Gdpr.Application" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Gdpr.Domain.Identity" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Gdpr.EntityFrameworkCore" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Gdpr.HttpApi" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Gdpr.Web" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Identity.WeChat.Work" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.IP2Region" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Notifications.Templating" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.OpenIddict.QrCode" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.Saas.DbChecker" Version="$(LINGYUNAbpPackageVersion)" />
+		<PackageVersion Include="LINGYUN.Abp.UI.Navigation.VueVbenAdmin5" Version="$(LINGYUNAbpPackageVersion)" />
+	</ItemGroup>
+
+	<!-- LY -->
+	<ItemGroup>
+		<PackageVersion Include="LY.MicroService.Applications.Single.EntityFrameworkCore.MySql" Version="$(LINGYUNAbpPackageVersion)" />
+	    <PackageVersion Include="LY.MicroService.Applications.Single.EntityFrameworkCore.SqlServer" Version="$(LINGYUNAbpPackageVersion)" />
 	</ItemGroup>
 </Project>

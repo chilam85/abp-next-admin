@@ -1,0 +1,34 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:19139",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "Single.MySql.Dev": {
+      "commandName": "Project",
+      "workingDirectory": "bin\\Debug\\net9.0",//因为文件在本项目目录并不真实存在，但在includ后生成到输出目录了，所以要手动指定调试时的运行目录
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://0.0.0.0:30001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APPLICATION_DATABASE_PROVIDER": "MySql"
+      }
+    },
+    "Single.SqlServer.Dev": {
+      "commandName": "Project",
+      "workingDirectory": "bin\\Debug\\net9.0",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://0.0.0.0:30001",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APPLICATION_DATABASE_PROVIDER": "SqlServer"
+      }
+    }
+  }
+}

@@ -5,17 +5,77 @@
 	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>LY.AIO.Applications.Single</RootNamespace>
+		<RootNamespace>LY.MicroService.Applications.Single</RootNamespace>
 		<GeneratePackageOnBuild Condition="$(AssemblyName.StartsWith('LINGYUN'))">false</GeneratePackageOnBuild>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
+		<!-- 引用 LY.MicroService.Applications.Single 项目的所有 C# 文件 -->
+		<Compile Include="..\LY.MicroService.Applications.Single\**\*.cs">
+			<Link>%(RecursiveDir)%(FileName)%(Extension)</Link>
+		</Compile>
+
+		<!--<Compile Remove="..\LY.MicroService.Applications.Single\obj\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\bin\**\*.cs" />-->
+		<!--**\obj\** 能匹配任意深度的 obj 目录-->
+		<Compile Remove="..\LY.MicroService.Applications.Single\Properties\AssemblyInfo.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\**\obj\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\**\bin\**\*.cs" />
+
+		<!-- 排除日志、临时、生成代码等运行时/工具生成目录 -->
+		<Compile Remove="..\LY.MicroService.Applications.Single\blobs\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\Logs\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\log\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\temp\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\Temp\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\tmp\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\Generated\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\generated\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\Artifacts\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\.vs\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\.idea\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\.git\**\*.cs" />
+
+		<!-- 可选：排除测试相关目录（如果你不希望包含测试代码） -->
+		<Compile Remove="..\LY.MicroService.Applications.Single\**\*Test*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\Tests\**\*.cs" />
+		<Compile Remove="..\LY.MicroService.Applications.Single\test\**\*.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- 引入项目的视图文件（MVC Views 和 Razor Pages） -->
+		<Content Include="..\LY.MicroService.Applications.Single\Views\**\*" Link="Views\%(RecursiveDir)%(FileName)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+
+		<Content Include="..\LY.MicroService.Applications.Single\Pages\**\*" Link="Pages\%(RecursiveDir)%(FileName)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+
+		<!-- 包含静态资源 -->
+		<Content Include="..\LY.MicroService.Applications.Single\wwwroot\**\*" Link="wwwroot\%(RecursiveDir)%(FileName)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="openiddict.pfx" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="..\LY.MicroService.Applications.Single\appsettings.Development.json" Link="appsettings.Development.json" CopyToOutputDirectory="PreserveNewest" />
+	  <Content Include="..\LY.MicroService.Applications.Single\appsettings.json" Link="appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+	  <Content Include="..\LY.MicroService.Applications.Single\appsettings.Production.json" Link="appsettings.Production.json" CopyToOutputDirectory="PreserveNewest" />
+	  <Content Include="..\LY.MicroService.Applications.Single\appsettings.SqlServer.json" Link="appsettings.SqlServer.json" CopyToOutputDirectory="PreserveNewest" />
+	  <Content Include="..\LY.MicroService.Applications.Single\package-lock.json" Link="package-lock.json" CopyToOutputDirectory="PreserveNewest" />
+	  <Content Include="..\LY.MicroService.Applications.Single\package.json" Link="package.json" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AgileConfig.Client" />
 		<PackageReference Include="DistributedLock.Redis" />
+		<PackageReference Include="DotNetCore.CAP.Dashboard" />
+		<PackageReference Include="DotNetCore.CAP.RabbitMQ" />
+		<PackageReference Include="DotNetCore.CAP.InMemoryStorage" />
+		<PackageReference Include="DotNetCore.CAP.RedisStreams" />
 		<PackageReference Include="Elsa.Activities.Email" />
 		<PackageReference Include="Elsa.Activities.Http" />
 		<PackageReference Include="Elsa.Activities.UserTask" />
 		<PackageReference Include="Elsa.Activities.Temporal.Quartz" />
-		<!--<PackageReference Include="Elsa.Designer.Components.Web" />-->
 		<PackageReference Include="Elsa.Webhooks.Api" />
 		<PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
 		<PackageReference Include="OpenIddict.Validation.DataProtection" />
@@ -28,36 +88,39 @@
 		<PackageReference Include="Serilog.Settings.Configuration" />
 		<PackageReference Include="Serilog.Sinks.Elasticsearch" />
 		<PackageReference Include="Serilog.Sinks.File" />
-		<PackageReference Include="Swashbuckle.AspNetCore" />
 		<PackageReference Include="Quartz.Serialization.Json" />
 		<PackageReference Include="Volo.Abp.Account.Web.OpenIddict" />
-		<!--<PackageReference Include="Volo.Abp.Account.Web.IdentityServer" />-->
 		<PackageReference Include="Volo.Abp.AspNetCore.Serilog" />
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" />
-		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />
+		<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" />
+		<!--<PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" />-->
 		<PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" />
 		<PackageReference Include="Volo.Abp.Autofac" />
 		<PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" />
-		<PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" />
 		<PackageReference Include="Volo.Abp.FeatureManagement.Application" />
 		<PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" />
 		<PackageReference Include="Volo.Abp.FeatureManagement.HttpApi" />
+		<PackageReference Include="Volo.Abp.FeatureManagement.Web" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.Application" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.Domain.Identity" />
-		<PackageReference Include="Volo.Abp.PermissionManagement.Domain.IdentityServer" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.Domain.OpenIddict" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.HttpApi" />
-		<PackageReference Include="Volo.Abp.Identity.AspNetCore" />
-		<PackageReference Include="Volo.Abp.Imaging.ImageSharp" />
-		<!--<PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" />-->
-		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
 		<PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" />
+		<PackageReference Include="Volo.Abp.PermissionManagement.Web" />
+		<PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" />
+		<PackageReference Include="Volo.Abp.SettingManagement.Web" />
+		<PackageReference Include="Volo.Abp.Swashbuckle" />
+		<PackageReference Include="Volo.Abp.Identity.AspNetCore" />
+		<PackageReference Include="Volo.Abp.Identity.Web" />
+		<PackageReference Include="Volo.Abp.VirtualFileExplorer.Web" />
+		<PackageReference Include="Volo.Abp.Imaging.ImageSharp" />
+		<PackageReference Include="Volo.Abp.MailKit" />
 		<PackageReference Include="Volo.Abp.OpenIddict.EntityFrameworkCore" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="LINGYUN.Abp.AuditLogging.EntityFrameworkCore" />
+		<PackageReference Include="LINGYUN.Abp.AuditLogging.IP.Location" />
 		<PackageReference Include="LINGYUN.Abp.AuditLogging" />
 		<PackageReference Include="LINGYUN.Abp.Authentication.QQ" />
 		<PackageReference Include="LINGYUN.Abp.Authentication.WeChat" />
@@ -69,6 +132,7 @@
 		<PackageReference Include="LINGYUN.Abp.Tencent" />
 		<PackageReference Include="LINGYUN.Abp.AspNetCore.HttpOverrides" />
 		<PackageReference Include="LINGYUN.Abp.Data.DbMigrator" />
+		<PackageReference Include="LINGYUN.Abp.EventBus.CAP" />
 		<PackageReference Include="LINGYUN.Abp.ExceptionHandling.Emailing" />
 		<PackageReference Include="LINGYUN.Abp.ExceptionHandling" />
 		<PackageReference Include="LINGYUN.Abp.Features.LimitValidation.Redis.Client" />
@@ -76,6 +140,7 @@
 		<PackageReference Include="LINGYUN.Abp.Features.LimitValidation" />
 		<PackageReference Include="LINGYUN.Abp.Http.Client.Wrapper" />
 		<PackageReference Include="LINGYUN.Abp.IdGenerator" />
+		<PackageReference Include="LINGYUN.Abp.IP2Region" />
 		<PackageReference Include="LINGYUN.Abp.RealTime" />
 		<PackageReference Include="LINGYUN.Abp.Wrapper" />
 		<PackageReference Include="LINGYUN.Abp.Dynamic.Queryable.Application.Contracts" />
@@ -86,7 +151,6 @@
 		<PackageReference Include="LINGYUN.Abp.FeatureManagement.Client" />
 		<PackageReference Include="LINGYUN.Abp.AspNetCore.Mvc.Localization" />
 		<PackageReference Include="LINGYUN.Abp.Localization.CultureMap" />
-		<PackageReference Include="LINGYUN.Abp.Localization.Persistence" />
 		<PackageReference Include="LINGYUN.Abp.Logging.Serilog.Elasticsearch" />
 		<PackageReference Include="LINGYUN.Abp.Logging" />
 		<PackageReference Include="LINGYUN.Abp.Serilog.Enrichers.Application" />
@@ -97,8 +161,10 @@
 		<PackageReference Include="LINGYUN.Abp.UI.Navigation" />
 		<PackageReference Include="LINGYUN.Abp.OpenApi.Authorization" />
 		<PackageReference Include="LINGYUN.Abp.OpenApi" />
+		<PackageReference Include="LINGYUN.Abp.Claims.Mapping" />
 		<PackageReference Include="LINGYUN.Abp.SettingManagement.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.MultiTenancy.Editions" />
+		<PackageReference Include="LINGYUN.Abp.Identity.WeChat.Work" />
 		<PackageReference Include="LINGYUN.Abp.Identity.WeChat" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.MiniProgram" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.Official.Handlers" />
@@ -107,18 +173,19 @@
 		<PackageReference Include="LINGYUN.Abp.WeChat.Official.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.SettingManagement" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.Work.Application" />
+		<PackageReference Include="LINGYUN.Abp.WeChat.Work.ExternalContact" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.Work.Handlers" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.Work.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.WeChat.Work" />
 		<PackageReference Include="LINGYUN.Abp.WeChat" />
-	</ItemGroup>
+	</ItemGroup>	
 
 	<ItemGroup>
 		<PackageReference Include="LINGYUN.Abp.Account.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.Account.Application" />
-		<PackageReference Include="LINGYUN.Abp.Account.Emailing" />
 		<PackageReference Include="LINGYUN.Abp.Account.HttpApi" />
-		<PackageReference Include="LINGYUN.Abp.Account.Templates" />
+		<PackageReference Include="LINGYUN.Abp.Account.Web.OAuth" />
+		<PackageReference Include="LINGYUN.Abp.Account.Web.OpenIddict" />
 		<PackageReference Include="LINGYUN.Abp.Auditing.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.Auditing.Application" />
 		<PackageReference Include="LINGYUN.Abp.Auditing.HttpApi" />
@@ -130,6 +197,9 @@
 		<PackageReference Include="LINGYUN.Abp.DataProtectionManagement.Application" />
 		<PackageReference Include="LINGYUN.Abp.DataProtectionManagement.EntityFrameworkCore" />
 		<PackageReference Include="LINGYUN.Abp.DataProtectionManagement.HttpApi" />
+		<!--<PackageReference Include="LINGYUN.Abp.Demo.Application" />
+		<PackageReference Include="LINGYUN.Abp.Demo.EntityFrameworkCore" />
+		<PackageReference Include="LINGYUN.Abp.Demo.HttpApi" />-->
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities.BlobStoring" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities.Emailing" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities.IM" />
@@ -137,13 +207,17 @@
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities.Sms" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities.Webhooks" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.Activities" />
-<!--		<PackageReference Include="LINGYUN.Abp.Elsa.EntityFrameworkCore.PostgreSql" />-->
+		<PackageReference Include="LINGYUN.Abp.Elsa.Designer" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.EntityFrameworkCore" />
 		<PackageReference Include="LINGYUN.Abp.Elsa.Server" />
 		<PackageReference Include="LINGYUN.Abp.Elsa" />
 		<PackageReference Include="LINGYUN.Abp.FeatureManagement.Application" />
 		<PackageReference Include="LINGYUN.Abp.FeatureManagement.HttpApi" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.Session" />
+		<PackageReference Include="LINGYUN.Abp.Gdpr.Application" />
+		<PackageReference Include="LINGYUN.Abp.Gdpr.Domain.Identity" />
+		<PackageReference Include="LINGYUN.Abp.Gdpr.EntityFrameworkCore" />
+		<PackageReference Include="LINGYUN.Abp.Gdpr.HttpApi" />
+		<PackageReference Include="LINGYUN.Abp.Gdpr.Web" />
 		<PackageReference Include="LINGYUN.Abp.Identity.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.Identity.Application" />
 		<PackageReference Include="LINGYUN.Abp.Identity.AspNetCore.Session" />
@@ -153,15 +227,6 @@
 		<PackageReference Include="LINGYUN.Abp.Identity.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.Identity.Notifications" />
 		<PackageReference Include="LINGYUN.Abp.Identity.OrganizaztionUnits" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.Application.Contracts" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.Application" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.Domain" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.EntityFrameworkCore" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.HttpApi" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.LinkUser" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.Portal" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.SmsValidator" />
-		<PackageReference Include="LINGYUN.Abp.IdentityServer.WeChat.Work" />
 		<PackageReference Include="LINGYUN.Abp.Identity.Session.AspNetCore" />
 		<PackageReference Include="LINGYUN.Abp.LocalizationManagement.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Abp.LocalizationManagement.Application" />
@@ -171,6 +236,7 @@
 		<PackageReference Include="LINGYUN.Abp.LocalizationManagement.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.OpenIddict.AspNetCore.Session" />
 		<PackageReference Include="LINGYUN.Abp.OpenIddict.AspNetCore" />
+		<PackageReference Include="LINGYUN.Abp.OpenIddict.QrCode" />
 		<PackageReference Include="LINGYUN.Abp.IM.SignalR" />
 		<PackageReference Include="LINGYUN.Abp.IM" />
 		<PackageReference Include="LINGYUN.Abp.MessageService.Application.Contracts" />
@@ -190,6 +256,7 @@
 		<PackageReference Include="LINGYUN.Abp.Notifications.Domain" />
 		<PackageReference Include="LINGYUN.Abp.Notifications.EntityFrameworkCore" />
 		<PackageReference Include="LINGYUN.Abp.Notifications.HttpApi" />
+		<PackageReference Include="LINGYUN.Abp.Notifications.Templating" />
 		<PackageReference Include="LINGYUN.Abp.Notifications.WeChat.MiniProgram" />
 		<PackageReference Include="LINGYUN.Abp.Notifications.WeChat.Work" />
 		<PackageReference Include="LINGYUN.Abp.OpenIddict.Application.Contracts" />
@@ -212,7 +279,7 @@
 		<PackageReference Include="LINGYUN.Abp.PermissionManagement.Application" />
 		<PackageReference Include="LINGYUN.Abp.PermissionManagement.Domain.OrganizationUnits" />
 		<PackageReference Include="LINGYUN.Abp.PermissionManagement.HttpApi" />
-		<PackageReference Include="LINGYUN.Abp.UI.Navigation.VueVbenAdmin" />
+		<PackageReference Include="LINGYUN.Abp.UI.Navigation.VueVbenAdmin5" />
 		<PackageReference Include="LINGYUN.Platform.Application.Contracts" />
 		<PackageReference Include="LINGYUN.Platform.Application" />
 		<PackageReference Include="LINGYUN.Platform.Domain.Shared" />
@@ -222,6 +289,7 @@
 		<PackageReference Include="LINGYUN.Platform.Settings.VueVbenAdmin" />
 		<PackageReference Include="LINGYUN.Platform.Theme.VueVbenAdmin" />
 		<PackageReference Include="LINGYUN.Abp.Saas.Application.Contracts" />
+		<PackageReference Include="LINGYUN.Abp.Saas.DbChecker" />
 		<PackageReference Include="LINGYUN.Abp.Saas.Domain.Shared" />
 		<PackageReference Include="LINGYUN.Abp.Saas.Domain" />
 		<PackageReference Include="LINGYUN.Abp.Saas.Application" />
@@ -262,4 +330,25 @@
 		<PackageReference Include="LINGYUN.Abp.WebhooksManagement.HttpApi" />
 		<PackageReference Include="LINGYUN.Abp.Webhooks" />
 	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.Application\LINGYUN.Abp.Demo.Application.csproj" />
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.EntityFrameworkCore\LINGYUN.Abp.Demo.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.HttpApi\LINGYUN.Abp.Demo.HttpApi.csproj" />
+		<ProjectReference Include="..\..\migrations\LY.MicroService.Applications.Single.EntityFrameworkCore.MySql\LY.MicroService.Applications.Single.EntityFrameworkCore.MySql.csproj" />
+		<!--<ProjectReference Include="..\..\migrations\LY.MicroService.Applications.Single.EntityFrameworkCore.SqlServer\LY.MicroService.Applications.Single.EntityFrameworkCore.SqlServer.csproj" />-->
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Logs\" />
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\LY.MicroService.Applications.Single\.gitignore" Link=".gitignore" />
+	  <None Include="..\LY.MicroService.Applications.Single\.yarnrc" Link=".yarnrc" />
+	  <None Include="..\LY.MicroService.Applications.Single\openiddict.pfx" Link="openiddict.pfx" />
+	  <None Include="..\LY.MicroService.Applications.Single\yarn.lock" Link="yarn.lock" />
+	</ItemGroup>
+
 </Project>

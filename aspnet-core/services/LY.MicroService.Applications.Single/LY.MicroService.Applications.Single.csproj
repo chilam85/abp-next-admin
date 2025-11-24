@@ -6,7 +6,7 @@
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>LY.MicroService.Applications.Single</RootNamespace>
-		<ImplicitUsings>enable</ImplicitUsings>
+		
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -19,7 +19,7 @@
 		<PackageReference Include="DotNetCore.CAP.Dashboard" />
 		<PackageReference Include="DotNetCore.CAP.RabbitMQ" />
 		<PackageReference Include="DotNetCore.CAP.InMemoryStorage" />
-		<PackageReference Include="DotNetCore.CAP.RedisStreams " />
+		<PackageReference Include="DotNetCore.CAP.RedisStreams" />
 		<PackageReference Include="Elsa.Activities.Email" />
 		<PackageReference Include="Elsa.Activities.Http" />
 		<PackageReference Include="Elsa.Activities.UserTask" />

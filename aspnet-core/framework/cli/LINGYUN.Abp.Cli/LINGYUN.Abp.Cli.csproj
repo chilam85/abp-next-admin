@@ -29,7 +29,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" />
-		<!--<PackageReference Include="NETStandard.Library" Version="2.0.3" />-->
+		<!--<PackageReference Include="NETStandard.Library" />-->
 		<PackageReference Include="Serilog.Extensions.Logging" />
 		<PackageReference Include="Serilog.Sinks.File" />
 		<PackageReference Include="Serilog.Sinks.Console" />

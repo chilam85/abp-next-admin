@@ -1,0 +1,20 @@
+# .github/workflows/validate-cpvm.yml
+name: Validate CPVM
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Validate CPVM (Bash)
+        run: |
+          chmod +x ./validate-cpvm.sh
+          ./validate-cpvm.sh .
