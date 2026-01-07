@@ -1,0 +1,16 @@
+冻佛: 12-14 10:37:25
+EventHandler和seed contributor 会被多个Host扫到，导致出问题。不同实例共用库cap会出问题
+
+Y: 12-14 17:48:40
+单体项目加上UseUnitOfWork工作单元，数据就不能保存到数据库，感觉应该跟CAP有关，微服务的没有加UseUnitOfWork，不会有问题，把单体项目的UseUnitOfWork注释掉，就能保存成功，但是这样CAP与数据库的其他操作就不能保持事务的一致性了
+
+Single项目TenantSynchronizer注册了租户创建事件 IDistributedEventHandler<EntityCreatedEto<TenantEto>>，并且在HandleEventAsync中执行了    await DataSeeder.SeedAsync(eventData.Entity.Id);
+
+要想自动创建数据库要继承EfCoreRuntimeDatabaseMigratorBase,EfCoreDatabaseMigrationEventHandlerBase数据库要事先创建,abp只能帮你执行migration
+EfCoreRuntimeDatabaseMigratorBase的实现类在onPostApplication执行,EfCoreDatabaseMigrationEventHandlerBase的实现类会响应分布式事件
+
+abp官方在host的onPostapplication中调用的EfCoreRuntimeDatabaseMigratorBase,群主单独搞了一个migrator调用的额
+
+LY.MicroService.Applications.Single.EntityFrameworkCore项目里的SingleDbMigrationEventHandler和LY.MicroService.Applications.Single项目里的TenantSynchronizer，重复执行了seed导致事件重复
+
+/.well-known/openid-configuration暴露给他们拿公钥，/connect/token给他办法token

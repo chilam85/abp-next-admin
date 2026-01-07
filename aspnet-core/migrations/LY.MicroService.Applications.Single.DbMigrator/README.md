@@ -49,7 +49,7 @@
 
 ## 环境变量
 
-* `ASPNETCORE_ENVIRONMENT`: 设置运行环境（Development、Staging、Production等）
+* `DOTNET_ENVIRONMENT`: 设置运行环境（Development、Staging、Production等）
 * `DOTNET_ENVIRONMENT`: 同上，用于兼容性
 
 ## 注意事项
@@ -63,7 +63,7 @@
 
 1. 设置环境变量
    ```bash
-   export ASPNETCORE_ENVIRONMENT=Development
+   export DOTNET_ENVIRONMENT=Development
    ```
 
 2. 使用Visual Studio或Visual Studio Code进行调试

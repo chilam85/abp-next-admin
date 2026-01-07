@@ -42,6 +42,7 @@ public class Program
                 {
                     config.ReadFrom.Configuration(context.Configuration);
                 });
+            Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
             await builder.AddApplicationAsync<InternalApiGatewayModule>(options =>
             {
                 // 搜索 Modules 目录下所有文件作为插件
@@ -54,6 +55,7 @@ public class Program
                     SearchOption.AllDirectories);
             });
             var app = builder.Build();
+            
             await app.InitializeApplicationAsync();
             await app.RunAsync();
             return 0;

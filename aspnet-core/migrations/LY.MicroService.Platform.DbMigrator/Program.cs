@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
+using System.Diagnostics;
 
 namespace LY.MicroService.Platform.DbMigrator;
 
@@ -29,11 +30,15 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
-        return Host.CreateDefaultBuilder(args)
+        var builder = Host.CreateDefaultBuilder(args)
             .AddAppSettingsSecretsJson()
             .ConfigureServices((hostContext, services) =>
             {
                 services.AddHostedService<PlatformDbMigratorHostedService>();
             });
+        // 打印工作目录和配置文件路径
+        Debug.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
+        Console.WriteLine($"Current Directory: {Directory.GetCurrentDirectory()}");
+        return builder;
     }
 }

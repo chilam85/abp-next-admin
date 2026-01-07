@@ -14,7 +14,7 @@
       "launchBrowser": false,
       "applicationUrl": "http://0.0.0.0:30001",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
+        "DOTNET_ENVIRONMENT": "Production"
       }
     },
     "LY.MicroService.Applications.Single.Development": {
@@ -23,7 +23,7 @@
       "launchBrowser": false,
       "applicationUrl": "http://0.0.0.0:30000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development"
       }
     }
   }

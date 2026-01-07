@@ -49,7 +49,7 @@ Single application database migration tool for automatically executing database 
 
 ## Environment Variables
 
-* `ASPNETCORE_ENVIRONMENT`: Set runtime environment (Development, Staging, Production, etc.)
+* `DOTNET_ENVIRONMENT`: Set runtime environment (Development, Staging, Production, etc.)
 * `DOTNET_ENVIRONMENT`: Same as above, for compatibility
 
 ## Notes
@@ -63,7 +63,7 @@ Single application database migration tool for automatically executing database 
 
 1. Set Environment Variables
    ```bash
-   export ASPNETCORE_ENVIRONMENT=Development
+   export DOTNET_ENVIRONMENT=Development
    ```
 
 2. Debug with Visual Studio or Visual Studio Code

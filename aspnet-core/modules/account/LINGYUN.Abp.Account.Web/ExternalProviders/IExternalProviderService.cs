@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace LINGYUN.Abp.Account.Web.ExternalProviders;
 
-public interface IExternalProviderService
-{
-    Task<List<ExternalLoginProviderModel>> GetAllAsync();
-}
+    public interface IExternalProviderService
+    {
+        Task<List<ExternalLoginProviderModel>> GetAllAsync();
+    }

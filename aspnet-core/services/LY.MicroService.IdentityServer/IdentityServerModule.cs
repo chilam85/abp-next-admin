@@ -1,5 +1,6 @@
 ﻿using LINGYUN.Abp.Account;
 using LINGYUN.Abp.Account.Web.IdentityServer;
+using LINGYUN.Abp.Account.Web.OAuth;
 using LINGYUN.Abp.AspNetCore.HttpOverrides;
 using LINGYUN.Abp.AspNetCore.MultiTenancy;
 using LINGYUN.Abp.AspNetCore.Mvc.Wrapper;
@@ -32,6 +33,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Volo.Abp;
+using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
@@ -49,6 +51,7 @@ namespace LY.MicroService.IdentityServer;
     typeof(AbpAccountApplicationModule),
     typeof(AbpAccountHttpApiModule),
     typeof(AbpAccountWebIdentityServerModule),
+    typeof(AbpAccountWebOAuthModule),
     typeof(AbpGdprApplicationModule),
     typeof(AbpGdprHttpApiModule),
     typeof(AbpGdprWebModule),
@@ -98,7 +101,7 @@ public partial class IdentityServerModule : AbpModule
     {
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
-
+        
         ConfigureCaching(configuration);
         ConfigureIdentity(configuration);
         ConfigureFeatureManagement();

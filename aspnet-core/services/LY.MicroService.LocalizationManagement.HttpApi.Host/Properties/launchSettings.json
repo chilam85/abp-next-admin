@@ -14,7 +14,7 @@
       "launchBrowser": false,
       "applicationUrl": "http://127.0.0.1:30030",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development"
       }
     }
   }

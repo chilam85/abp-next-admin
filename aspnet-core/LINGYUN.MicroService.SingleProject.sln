@@ -700,6 +700,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINGYUN.Abp.WeChat.Work.OA"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINGYUN.Abp.Quartz.PostgresSqlInstaller", "modules\task-management\LINGYUN.Abp.Quartz.PostgresSqlInstaller\LINGYUN.Abp.Quartz.PostgresSqlInstaller.csproj", "{CD7B8501-57B7-6C0E-472F-4E9B894ED6C2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "system-info", "system-info", "{C595C210-AB53-4592-8D37-63B858B8021C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINGYUN.Abp.SystemInfo.HttpApi", "modules\system-info\LINGYUN.Abp.SystemInfo.HttpApi\LINGYUN.Abp.SystemInfo.HttpApi.csproj", "{BE7955EB-7943-77BA-B96C-F2CBD0054D5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1866,6 +1870,10 @@ Global
 		{CD7B8501-57B7-6C0E-472F-4E9B894ED6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD7B8501-57B7-6C0E-472F-4E9B894ED6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD7B8501-57B7-6C0E-472F-4E9B894ED6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE7955EB-7943-77BA-B96C-F2CBD0054D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE7955EB-7943-77BA-B96C-F2CBD0054D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE7955EB-7943-77BA-B96C-F2CBD0054D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE7955EB-7943-77BA-B96C-F2CBD0054D5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -2207,6 +2215,8 @@ Global
 		{C996D147-5B81-49D9-949B-F3BC185B2CD4} = {91867618-0D86-4410-91C6-B1166A9ACDF9}
 		{AB207B2A-C8E7-977D-98E6-66527CBB2B7F} = {91867618-0D86-4410-91C6-B1166A9ACDF9}
 		{CD7B8501-57B7-6C0E-472F-4E9B894ED6C2} = {91EE5D5B-B6DF-43F1-BC09-1A982719A34B}
+		{C595C210-AB53-4592-8D37-63B858B8021C} = {0B58AA48-665A-443F-A6A8-751FB9629DAF}
+		{BE7955EB-7943-77BA-B96C-F2CBD0054D5D} = {C595C210-AB53-4592-8D37-63B858B8021C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {711A43C0-A2F8-4E5C-9B9F-F2551E4B3FF1}

@@ -18,8 +18,8 @@ public class Program
     {
         try
         {
-            Console.Title = "IdentityServer.HttpApi.Host";
-            Log.Information("Starting IdentityServer.HttpApi.Host.");
+            Console.Title = "AuthServer.HttpApi.Host";
+            Log.Information("Starting AuthServer.HttpApi.Host.");
 
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()

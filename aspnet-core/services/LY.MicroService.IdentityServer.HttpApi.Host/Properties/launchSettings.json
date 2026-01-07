@@ -15,7 +15,7 @@
       "applicationUrl": "http://127.0.0.1:30015",
       "environmentVariables": {
         "APPLICATION_NAME": "Identity-Server-Admin",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "DOTNET_ENVIRONMENT": "Development"
       }
     }
   }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using LINGYUN.Abp.Account.Web.ExternalProviders;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +56,11 @@ public class Program
             });
             var app = builder.Build();
             await app.InitializeApplicationAsync();
+            var externalProviderService = app.Services.GetService<IExternalProviderService>();
+            if (externalProviderService == null)
+            {
+                Console.WriteLine("IExternalProviderService 未注册");
+            }
             await app.RunAsync();
             return 0;
         }

@@ -12,7 +12,7 @@ export function useSettings(): ISettingProvider {
   watch(
     () => abpStore.application,
     (application) => {
-      if (!application?.setting.values) {
+      if (!application?.setting?.values) {
         settings.value = [];
         return;
       }

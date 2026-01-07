@@ -61,7 +61,7 @@ const formSchema = computed((): VbenFormSchema[] => {
       rules: z.string().min(1, { message: $t('authentication.passwordTip') }),
     },
   ];
-  if (abpStore.application?.multiTenancy.isEnabled) {
+  if (abpStore.application?.multiTenancy?.isEnabled) {
     schemas = [
       {
         component: 'TenantSelect',

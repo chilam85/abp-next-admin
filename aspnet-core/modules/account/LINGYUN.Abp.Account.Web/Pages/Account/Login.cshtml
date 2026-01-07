@@ -117,7 +117,7 @@
                     </div>
                 </form>
             </abp-tab>
-            @if (Model.QrCodeLoginInput.IsEnabled)
+            @if (Model.QrCodeLoginInput != null && Model.QrCodeLoginInput.IsEnabled)
             {
                 <abp-tab title="@L["ScanQrCodeLogin"].Value" active="Model.LoginType == LoginType.QrCode" header-name="QrCodeLogin">
                     <form method="post" class="mt-4" asp-page-handler="QrCodeLogin" id="QrCodeForm">
