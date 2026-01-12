@@ -1,6 +1,6 @@
 @echo off
 cls
-set stime=8
+set stime=18
 
 ::start .\start-http-api-host.bat LY.MicroService.IdentityServer identityserver --run
 start .\start-http-api-host.bat LY.MicroService.AuthServer authserver --run

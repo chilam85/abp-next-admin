@@ -12,13 +12,36 @@
       "webRoot": "${workspaceFolder}/playground"
     },
     {
-      "type": "chrome",
+      // vben abp antd dev调试失败时使用attach方式折腾调试，利用前置任务先将Chrome以调试模式启动
+      "name": "vben abp antd dev (via attach)",
+      "type": "pwa-chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/apps/app-antd",
+      "sourceMaps": true,
+      "timeout": 20000,
+      // 👇 关键：先运行任务启动 Chrome
+      "preLaunchTask": "Start Chrome with Debug Port (PowerShell)",
+      // 防止重复启动
+      "postDebugTask": {
+        "type": "shell",
+        "command": "echo 'Debug session ended'"
+      }
+    },
+    {
+      "type": "pwa-chrome",
       "name": "vben abp antd dev",
       "request": "launch",
-      "url": "http://localhost:5666",
+      "url": "http://127.0.0.1:5666",
       "env": { "NODE_ENV": "development" },
       "sourceMaps": true,
-      "webRoot": "${workspaceFolder}/apps/app-antd"
+      "webRoot": "${workspaceFolder}/apps/app-antd",
+      "userDataDir": "${workspaceFolder}/.vscode/chrome-debug-profile",
+      // "runtimeExecutable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+      // 使用短路径避免空格问题
+      // "runtimeExecutable": "stable",
+      // "timeout": 30000,
+      "runtimeArgs": ["--do-not-de-elevate"] // 用管理员权限启动VSCode会导致无法附加调试，加上此参数解决
     },
     {
       "type": "chrome",

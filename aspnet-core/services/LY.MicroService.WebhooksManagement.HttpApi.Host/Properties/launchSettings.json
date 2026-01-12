@@ -16,6 +16,15 @@
         "DOTNET_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://127.0.0.1:30045"
+    },
+    "MySql.Dev": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "dotnetRunMessages": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://127.0.0.1:30045"
     }
   }
 }

@@ -37,4 +37,10 @@
 		<ProjectReference Include="..\LY.MicroService.IdentityServer.EntityFrameworkCore\LY.MicroService.IdentityServer.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="appsettings.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

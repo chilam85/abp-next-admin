@@ -31,6 +31,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
+using Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations;
 using Volo.Abp.Auditing;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.BlobStoring;
@@ -506,6 +507,7 @@ public partial class AuthServerHttpApiHostModule
         Configure<AbpWrapperOptions>(options =>
         {
             options.IsEnabled = true;
+            options.IgnoreReturnTypes.Add<ApplicationConfigurationDto>();
         });
     }
 

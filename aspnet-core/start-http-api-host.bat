@@ -22,6 +22,7 @@ exit
 
 :run
 dotnet run --no-build
+::--launch-profile "MySql.Dev"
 exit
 
 :watchrun

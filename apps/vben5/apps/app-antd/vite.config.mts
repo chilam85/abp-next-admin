@@ -9,19 +9,19 @@ export default defineConfig(async () => {
         proxy: {
           '/.well-known': {
             changeOrigin: true,
-            target: 'http://localhost:30000/',
+            target: 'http://127.0.0.1:44385/',
           },
           '/api': {
             changeOrigin: true,
-            target: 'http://localhost:30000/',
+            target: 'http://127.0.0.1:30000/',
           },
           '/connect': {
             changeOrigin: true,
-            target: 'http://localhost:30000/',
+            target: 'http://127.0.0.1:44385/',
           },
           '/signalr-hubs': {
             changeOrigin: true,
-            target: 'http://localhost:30000/',
+            target: 'http://127.0.0.1:30000/',
             ws: true,
           },
         },

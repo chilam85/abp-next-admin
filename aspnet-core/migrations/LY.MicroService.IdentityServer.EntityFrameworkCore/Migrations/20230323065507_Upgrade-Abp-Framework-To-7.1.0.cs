@@ -10,26 +10,26 @@ namespace LY.MicroService.IdentityServer.EntityFrameworkCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "EntityVersion",
-                table: "AbpUsers",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "EntityVersion",
+            //    table: "AbpUsers",
+            //    type: "int",
+            //    nullable: false,
+            //    defaultValue: 0);
 
-            migrationBuilder.AddColumn<int>(
-                name: "EntityVersion",
-                table: "AbpRoles",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "EntityVersion",
+            //    table: "AbpRoles",
+            //    type: "int",
+            //    nullable: false,
+            //    defaultValue: 0);
 
-            migrationBuilder.AddColumn<int>(
-                name: "EntityVersion",
-                table: "AbpOrganizationUnits",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            //migrationBuilder.AddColumn<int>(
+            //    name: "EntityVersion",
+            //    table: "AbpOrganizationUnits",
+            //    type: "int",
+            //    nullable: false,
+            //    defaultValue: 0);
         }
 
         /// <inheritdoc />

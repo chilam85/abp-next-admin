@@ -11,19 +11,19 @@ namespace LY.MicroService.IdentityServer.EntityFrameworkCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<DateTime>(
-                name: "CreationTime",
-                table: "AbpRoles",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            //migrationBuilder.AddColumn<DateTime>(
+            //    name: "CreationTime",
+            //    table: "AbpRoles",
+            //    type: "datetime(6)",
+            //    nullable: false,
+            //    defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
-            migrationBuilder.AddColumn<DateTime>(
-                name: "CreationTime",
-                table: "AbpClaimTypes",
-                type: "datetime(6)",
-                nullable: false,
-                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+            //migrationBuilder.AddColumn<DateTime>(
+            //    name: "CreationTime",
+            //    table: "AbpClaimTypes",
+            //    type: "datetime(6)",
+            //    nullable: false,
+            //    defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
 
         /// <inheritdoc />

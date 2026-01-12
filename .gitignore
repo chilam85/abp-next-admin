@@ -41,3 +41,4 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sw*
+/apps/vben5/.chrome-debug,

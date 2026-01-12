@@ -23,12 +23,12 @@ namespace LY.MicroService.IdentityServer.EntityFrameworkCore.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4")
                 .OldAnnotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.AddColumn<string>(
-                name: "ExtraProperties",
-                table: "AbpSessions",
-                type: "longtext",
-                nullable: true)
-                .Annotation("MySql:CharSet", "utf8mb4");
+            //migrationBuilder.AddColumn<string>(
+            //    name: "ExtraProperties",
+            //    table: "AbpSessions",
+            //    type: "longtext",
+            //    nullable: true)
+            //    .Annotation("MySql:CharSet", "utf8mb4");
         }
 
         /// <inheritdoc />

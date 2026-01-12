@@ -21,7 +21,7 @@ copy Dockerfile ..\..\..\..\..\aspnet-core\services\Publish\internal-apigateway\
 exit
 
 :run
-dotnet run 
+dotnet run
 exit
 
 :watchrun

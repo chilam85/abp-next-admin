@@ -17,6 +17,16 @@
         "APPLICATION_NAME": "Identity-Server-Admin",
         "DOTNET_ENVIRONMENT": "Development"
       }
+    },
+    "MySql.Dev": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://127.0.0.1:30015",
+      "environmentVariables": {
+        "APPLICATION_NAME": "Identity-Server-Admin",
+        "DOTNET_ENVIRONMENT": "Development"
+      }
     }
   }
 }
