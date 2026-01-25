@@ -7,3 +7,5 @@ foreach ($service in $serviceArray) {
 }
 
 Set-Location $rootFolder
+
+#build生成到aspnet-core\services\Publish目录

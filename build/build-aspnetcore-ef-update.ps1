@@ -2,10 +2,10 @@
 # $OutputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
-# ÇĞ»»µ½UTF-8´úÂëÒ³£¨65001£©
+# åˆ‡æ¢åˆ°UTF-8ä»£ç é¡µï¼ˆ65001ï¼‰
 #chcp 65001 | Out-Null
 
-# »òÇĞ»»µ½ÖĞÎÄÇø´úÂëÒ³£¨936£©
+# æˆ–åˆ‡æ¢åˆ°ä¸­æ–‡åŒºä»£ç é¡µï¼ˆ936ï¼‰
 # chcp 936 | Out-Null
 
 . "./build-aspnetcore-common.ps1"

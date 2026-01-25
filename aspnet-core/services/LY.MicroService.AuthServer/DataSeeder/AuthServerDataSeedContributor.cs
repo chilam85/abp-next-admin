@@ -109,8 +109,8 @@ public class ServerDataSeedContributor : IDataSeedContributor, ITransientDepende
         var vueClientId = configurationSection["VueAdmin:ClientId"];
         if (!vueClientId.IsNullOrWhiteSpace())
         {
-            var vueClientRootUrl = configurationSection["VueAdmin:RootUrl"].EnsureEndsWith('/');
-
+            //var vueClientRootUrl = configurationSection["VueAdmin:RootUrl"].EnsureEndsWith('/');
+            var vueClientRootUrls = configurationSection.GetSection("VueAdmin:RootUrls").Get<List<string>>();
             if (await _applicationRepository.FindByClientIdAsync(vueClientId) == null)
             {
                 var application = new OpenIddictApplicationDescriptor
@@ -120,16 +120,18 @@ public class ServerDataSeedContributor : IDataSeedContributor, ITransientDepende
                     ApplicationType = OpenIddictConstants.ApplicationTypes.Web,
                     ConsentType = OpenIddictConstants.ConsentTypes.Explicit,
                     DisplayName = "Abp Vue Admin Client",
-                    PostLogoutRedirectUris =
-                    {
-                        new Uri(vueClientRootUrl + "signout-callback"),
-                        new Uri(vueClientRootUrl)
-                    },
-                    RedirectUris =
-                    {
-                        new Uri(vueClientRootUrl + "signin-callback"),
-                        new Uri(vueClientRootUrl)
-                    },
+                    //PostLogoutRedirectUris =
+                    //{
+                    //    new Uri(vueClientRootUrl + "signout-callback"),
+                    //    new Uri(vueClientRootUrl)
+                    //},
+                    //RedirectUris =
+                    //{
+                    //    new Uri(vueClientRootUrl + "signin-callback"),
+                    //    new Uri(vueClientRootUrl)
+                    //},
+                    PostLogoutRedirectUris = { },
+                    RedirectUris = { },
                     Permissions =
                     {
                         OpenIddictConstants.Permissions.Endpoints.Authorization,
@@ -166,6 +168,16 @@ public class ServerDataSeedContributor : IDataSeedContributor, ITransientDepende
                 {
                     application.Permissions.AddIfNotContains(OpenIddictConstants.Permissions.Prefixes.Scope + scope);
                 }
+
+                vueClientRootUrls.ForEach(url =>
+                {
+                    application.PostLogoutRedirectUris.AddIfNotContains(new Uri(url.EnsureEndsWith('/')));
+                    application.PostLogoutRedirectUris.AddIfNotContains(new Uri(url.EnsureEndsWith('/') + "signout-callback"));
+
+                    application.RedirectUris.AddIfNotContains(new Uri(url));
+                    application.RedirectUris.AddIfNotContains(new Uri(url.EnsureEndsWith('/') + "signin-callback"));
+                    application.RedirectUris.AddIfNotContains(new Uri(url.EnsureEndsWith('/') + "swagger/oauth2-redirect.html"));
+                });
 
                 await _applicationManager.CreateAsync(application);
 

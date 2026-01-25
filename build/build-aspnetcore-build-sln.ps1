@@ -7,3 +7,5 @@ foreach ($solution in $solutionArray) {
 }
 
 Set-Location $rootFolder
+
+#build生成到aspnet-core\LocalNuget目录和bin\release目录

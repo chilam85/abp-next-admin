@@ -85,4 +85,10 @@
 	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="openiddict.pfx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

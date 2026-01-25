@@ -3,6 +3,9 @@
 # Build all solutions
 foreach ($solution in $serviceArray) {  
     $publishPath = $rootFolder + "/../aspnet-core/services/Publish/" + $solution.Service
+    if (Test-Path $publishPath) {
+        Remove-Item $publishPath -Recurse -Force
+    }
     dotnet publish -c Release -o $publishPath $solution.Path --no-cache
     $dockerFile = Join-Path $solution.Path "Dockerfile";
     if ((Test-Path $dockerFile)) {

@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   abp-redis:
-    image: redis:6
+    image: redis
     hostname: abp-redis
     container_name: abp-redis
     environment:
@@ -11,34 +11,36 @@ services:
       - ./deploy/middleware/redis/data:/data
     ports:
       - "6379:6379"
-    restart: always
+    # restart: always
+    restart: on-failure
     networks:
       - abp-next-admin
 
-  abp-mysql:
-    image: mysql
-    hostname: abp-mysql
-    container_name: abp-mysql
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_ROOT_HOST=%
-      - TZ=Asia/Shanghai
-    command:
-      --default-authentication-plugin=mysql_native_password
-      --character-set-server=utf8mb4
-      --collation-server=utf8mb4_general_ci
-      --lower_case_table_names=1
-      --max_connections=1024
-    volumes:
-      - ./deploy/middleware/mysql/data:/var/lib/mysql
-      - ./deploy/middleware/mysql/conf:/etc/mysql/conf.d
-      - ./deploy/middleware/mysql/logs:/logs
-      - ./deploy/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-    restart: always
-    networks:
-      - abp-next-admin
+  # abp-mysql:
+  #   image: mysql
+  #   hostname: abp-mysql
+  #   container_name: abp-mysql
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=123456
+  #     - MYSQL_ROOT_HOST=%
+  #     - TZ=Asia/Shanghai
+  #   command:
+  #     --default-authentication-plugin=mysql_native_password
+  #     --character-set-server=utf8mb4
+  #     --collation-server=utf8mb4_general_ci
+  #     --lower_case_table_names=1
+  #     --max_connections=1024
+  #   volumes:
+  #     - ./deploy/middleware/mysql/data:/var/lib/mysql
+  #     - ./deploy/middleware/mysql/conf:/etc/mysql/conf.d
+  #     - ./deploy/middleware/mysql/logs:/logs
+  #     - ./deploy/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+  #   # restart: always
+  #   restart: on-failure
+  #   networks:
+  #     - abp-next-admin
 
   abp-rabbitmq:
     image: rabbitmq:management
@@ -57,12 +59,13 @@ services:
     volumes:
       - ./deploy/middleware/rabbitmq/logs:/var/log/rabbitmq
       - ./deploy/middleware/rabbitmq/data:/var/lib/rabbitmq
-    restart: always
+    # restart: always
+    restart: on-failure
     networks:
       - abp-next-admin
 
   abp-elasticsearch:
-    image: elasticsearch:7.16.3
+    image: elasticsearch:8.17.2
     container_name: abp-elasticsearch
     restart: always
     environment:
@@ -79,7 +82,7 @@ services:
       - abp-next-admin
 
   abp-kibana:
-    image: kibana:7.16.3
+    image: kibana:8.17.2
     container_name: abp-kibana
     restart: always
     depends_on:
@@ -95,7 +98,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   abp-logstash:
-    image: logstash:7.16.3
+    image: logstash:8.17.2
     container_name: abp-logstash
     restart: always
     environment:

@@ -77,4 +77,10 @@
 		<ProjectReference Include="..\..\modules\platform\LINGYUN.Abp.Sms.Platform\LINGYUN.Abp.Sms.Platform.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="tempkey.jwk">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

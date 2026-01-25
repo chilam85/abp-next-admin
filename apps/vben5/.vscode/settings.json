@@ -188,9 +188,10 @@
   ],
 
   "github.copilot.enable": {
-    "*": true,
-    "markdown": true,
+    "*": false,
     "plaintext": false,
+    "markdown": true,
+    "scminput": false,
     "yaml": false
   },
 

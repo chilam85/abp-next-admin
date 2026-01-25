@@ -20,7 +20,10 @@ public class Program
         {
             Console.Title = "AuthServer";
             Log.Information("Starting AuthServer.");
- 
+
+            // 禁用 Static Web Assets
+            //AppContext.SetSwitch("Microsoft.AspNetCore.StaticWebAssets.Enable", false);
+
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
