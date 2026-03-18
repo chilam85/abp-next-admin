@@ -17,6 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Volo.Abp.AspNetCore.Mvc" />
+		<PackageReference Include="Volo.Abp.Authorization" />
 	</ItemGroup>
 
 	<ItemGroup>

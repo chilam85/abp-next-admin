@@ -187,17 +187,17 @@
   </ItemGroup>
   <!-- Aspire -->
   <ItemGroup>
-    <PackageVersion Include="Aspire.Hosting.Elasticsearch" Version="13.0.0" />
-    <PackageVersion Include="Aspire.Hosting.JavaScript" Version="$(AspirePackageVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Elasticsearch" Version="13.1.0" />
+    <PackageVersion Include="Aspire.Hosting.JavaScript" Version="13.1.2" />
     <PackageVersion Include="Aspire.Hosting.MySql" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspirePackageVersion)" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.1.2" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="13.1.2" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="13.1.2" />
     <PackageVersion Include="Aspire.MySqlConnector" Version="$(AspirePackageVersion)" />
     <PackageVersion Include="Aspire.Pomelo.EntityFrameworkCore.MySql" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.RabbitMQ.Client" Version="$(AspirePackageVersion)" />
-    <PackageVersion Include="Aspire.Elastic.Clients.Elasticsearch" Version="13.0.0" />
+    <PackageVersion Include="Aspire.StackExchange.Redis" Version="13.1.2" />
+    <PackageVersion Include="Aspire.RabbitMQ.Client" Version="13.1.2" />
+    <PackageVersion Include="Aspire.Elastic.Clients.Elasticsearch" Version="13.1.0" />
   </ItemGroup>
   <!-- Elsa -->
   <ItemGroup>
@@ -370,5 +370,6 @@
     <PackageVersion Include="TencentCloudSDK" Version="3.0.1273" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.3.0" />
     <PackageVersion Include="Yarp.Telemetry.Consumption" Version="2.3.0" />
+	<PackageVersion Include="AutoMapper" Version="16.0.0" />
   </ItemGroup>
 </Project>

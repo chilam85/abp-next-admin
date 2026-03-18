@@ -1,4 +1,5 @@
 using LINGYUN.Abp.SystemInfo;
+using Volo.Abp.AspNetCore.Mvc.UI;
 
 namespace LY.MicroService.Applications.Single;
 
@@ -38,6 +39,7 @@ namespace LY.MicroService.Applications.Single;
     typeof(AbpAccountApplicationModule),
     // 账户模块 控制器
     typeof(AbpAccountHttpApiModule),
+    typeof(AbpAspNetCoreMvcUiModule),
     // 账户模块 OpenIddict集成
     typeof(AbpAccountWebOpenIddictModule),
     // 账户模块 OAuth集成

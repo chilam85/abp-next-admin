@@ -1,5 +1,8 @@
 ﻿using LINGYUN.Abp.DataProtectionManagement;
 using LINGYUN.Abp.DataProtectionManagement.EntityFrameworkCore;
+using LINGYUN.Abp.Demo.Authors;
+using LINGYUN.Abp.Demo.Books;
+using LINGYUN.Abp.Demo.EntityFrameworkCore;
 using LINGYUN.Abp.Saas.Editions;
 using LINGYUN.Abp.Saas.EntityFrameworkCore;
 using LINGYUN.Abp.Saas.Tenants;
@@ -25,7 +28,8 @@ public class AdminServiceMigrationsDbContext :
     IFeatureManagementDbContext,
     ISettingManagementDbContext,
     IPermissionManagementDbContext,
-    IAbpDataProtectionManagementDbContext
+    IAbpDataProtectionManagementDbContext,
+    IDemoDbContext
 {
     #region Entities from the modules
 
@@ -57,6 +61,10 @@ public class AdminServiceMigrationsDbContext :
 
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    public DbSet<Book> Books { get; set; }
+
+    public DbSet<Author> Authors { get; set; }
+
     #endregion
 
     public AdminServiceMigrationsDbContext(DbContextOptions<AdminServiceMigrationsDbContext> options)
@@ -75,5 +83,6 @@ public class AdminServiceMigrationsDbContext :
         modelBuilder.ConfigureSettingManagement();
         modelBuilder.ConfigurePermissionManagement();
         modelBuilder.ConfigureDataProtectionManagement();
+        modelBuilder.ConfigureDemo();
     }
 }

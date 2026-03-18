@@ -463,6 +463,21 @@
             "ResponseHeadersAllowed": "_AbpWrapResult;_AbpDontWrapResult;_AbpErrorFormat"
           }
         ]
+      },
+      "demo-route": {
+        "ClusterId": "demo-cluster",
+        "Match": {
+          "Path": "/api/demo/{**everything}"
+        },
+        "Transforms": [
+          {
+            "HeaderPrefix": "X-Forwarded-",
+            "X-Forwarded": "Append"
+          },
+          {
+            "ResponseHeadersAllowed": "_AbpWrapResult;_AbpDontWrapResult;_AbpErrorFormat"
+          }
+        ]
       }
     },
     "Clusters": {
@@ -569,6 +584,16 @@
             "Address": "http://localhost:30060",
             "Metadata": {
               "SwaggerEndpoint": "http://localhost:30060"
+            }
+          }
+        }
+      },
+      "demo-cluster": {
+        "Destinations": {
+          "destination1": {
+            "Address": "http://localhost:30010",
+            "Metadata": {
+              "SwaggerEndpoint": "http://localhost:30010"
             }
           }
         }

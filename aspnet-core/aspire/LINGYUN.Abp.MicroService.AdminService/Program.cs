@@ -1,6 +1,7 @@
 using LINGYUN.Abp.Identity.Session.AspNetCore;
 using LINGYUN.Abp.MicroService.AdminService;
 using LINGYUN.Abp.Serilog.Enrichers.Application;
+using Microsoft.AspNetCore.Authorization;
 using Serilog;
 using Volo.Abp.IO;
 using Volo.Abp.Modularity.PlugIns;
@@ -36,7 +37,7 @@ try
         DirectoryHelper.CreateIfNotExists(pluginFolder);
         options.PlugInSources.AddFolder(pluginFolder, SearchOption.AllDirectories);
     });
-
+    builder.Services.AddSingleton<IAuthorizationHandler, LoggingPermissionAuthorizationHandler>();
     var app = builder.Build();
 
     await app.InitializeApplicationAsync();
@@ -50,7 +51,7 @@ try
     app.UseCorrelationId();
     // 文件系统
     app.MapAbpStaticAssets();
-    // 路由
+    // 路由（要在UseAuthorization之前）
     app.UseRouting();
     // 跨域
     app.UseCors();
@@ -81,6 +82,22 @@ try
     app.UseAbpSerilogEnrichers();
     // 路由
     app.UseConfiguredEndpoints();
+
+    // 添加诊断中间件
+    app.Use(async (context, next) =>
+    {
+        if (context.User.Identity.IsAuthenticated)
+        {
+            var claims = context.User.Claims.Select(c => $"{c.Type}: {c.Value}");
+            Console.WriteLine("Current User Claims:");
+            Console.WriteLine(string.Join("\n", claims));
+
+            var roles = context.User.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
+            Console.WriteLine(">>> ROLES IN TOKEN: " + string.Join(", ", roles));
+        }
+
+        await next();
+    });
 
     await app.RunAsync();
 }

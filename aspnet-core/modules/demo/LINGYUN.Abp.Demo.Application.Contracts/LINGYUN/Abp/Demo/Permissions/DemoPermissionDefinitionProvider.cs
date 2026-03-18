@@ -1,6 +1,7 @@
 ﻿using LINGYUN.Abp.Demo.Localization;
 using Volo.Abp.Authorization.Permissions;
 using Volo.Abp.Localization;
+using Volo.Abp.MultiTenancy;
 
 namespace LINGYUN.Abp.Demo.Permissions;
 public class DemoPermissionDefinitionProvider : PermissionDefinitionProvider
@@ -9,7 +10,12 @@ public class DemoPermissionDefinitionProvider : PermissionDefinitionProvider
     {
         var demoGroup = context.AddGroup(DemoPermissions.GroupName, L("Permission:Demo"));
 
-        var booksPermission = demoGroup.AddPermission(DemoPermissions.Books.Default, L("Permission:Books"));
+        // 修复：直接在 AddPermission 时设置 MultiTenancySides
+        var booksPermission = demoGroup.AddPermission(
+            DemoPermissions.Books.Default,
+            L("Permission:Books")//,
+            //multiTenancySide: MultiTenancySides.Tenant
+        );
         booksPermission.AddChild(DemoPermissions.Books.Create, L("Permission:Books.Create"));
         booksPermission.AddChild(DemoPermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(DemoPermissions.Books.Delete, L("Permission:Books.Delete"));

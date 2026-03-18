@@ -40,4 +40,5 @@ catch (Exception ex)
 finally
 {
     await Log.CloseAndFlushAsync();
+    Environment.Exit(Environment.ExitCode);
 }

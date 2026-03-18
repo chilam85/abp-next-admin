@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.IO;
+using System.Linq;
 using Volo.Abp.IO;
 using Volo.Abp.Modularity.PlugIns;
 
@@ -77,6 +78,22 @@ try
     app.UseAuditing();
     app.UseAbpSerilogEnrichers();
     app.UseConfiguredEndpoints();
+
+    // 添加诊断中间件
+    app.Use(async (context, next) =>
+    {
+        if (context.User.Identity.IsAuthenticated)
+        {
+            var claims = context.User.Claims.Select(c => $"{c.Type}: {c.Value}");
+            Console.WriteLine(">>> Current User Claims:");
+            Console.WriteLine(string.Join("\n", claims));
+
+            var roles = context.User.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
+            Console.WriteLine(">>> ROLES IN TOKEN: " + string.Join(", ", roles));
+        }
+
+        await next();
+    });
 
     await app.RunAsync();
 }

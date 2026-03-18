@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Volo.Abp.Data;
 
 namespace LINGYUN.Abp.MicroService.TaskService;
 public class TaskServiceMigrationsDbContextFactory : IDesignTimeDbContextFactory<TaskServiceMigrationsDbContext>
@@ -9,7 +10,9 @@ public class TaskServiceMigrationsDbContextFactory : IDesignTimeDbContextFactory
     public TaskServiceMigrationsDbContext CreateDbContext(string[] args)
     {
         var configuration = BuildConfiguration();
-        var connectionString = configuration.GetConnectionString("Default");
+        //var connectionString = configuration.GetConnectionString("Default");
+        var flag = ConnectionStringNameAttribute.GetConnStringName<TaskServiceMigrationsDbContext>();
+        var connectionString = configuration.GetConnectionString(flag);
 
         var builder = new DbContextOptionsBuilder<TaskServiceMigrationsDbContext>()
             .UseNpgsql(connectionString);

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 var builder = DistributedApplication.CreateBuilder(args);
 
 // Redis
-var redis = builder.AddRedis("redis")
+var redis = builder.AddRedis("redis", port: 6379)
     .WithContainerName("redis")
     .WithDataVolume("redis-dev");
 
@@ -23,8 +23,10 @@ builder.AddContainer("kibana", "kibana", "8.17.3")
     .WaitFor(elasticsearch);
 
 // Postgres
-var postgres = builder.AddPostgres("postgres")
+var postgres = builder.AddPostgres("postgres", port: 15432)
     .WithPassword(builder.AddParameter("postgres-pwd", "123456", secret: true))
+    //.WithEndpoint(port: 5432, hostPort: 15432)
+    //.WithHostPort(15432)
     .WithImage("postgres", "17-alpine")
     .WithContainerName("postgres")
     .WithDataVolume("postgres-dev");
@@ -40,13 +42,13 @@ var rabbitmq = builder.AddRabbitMQ("rabbitmq",
     .WithManagementPlugin();
 
 IResourceBuilder<ProjectResource> AddDotNetProject<TDbMigrator, TProject>(
-    IDistributedApplicationBuilder builder, 
+    IDistributedApplicationBuilder builder,
     string servicePrefix,
     int port,
     string portName,
     string serviceSuffix = "Service",
     string migratorSuffix = "Migrator",
-    IResourceBuilder<ProjectResource>? waitProject = null) 
+    IResourceBuilder<ProjectResource>? waitProject = null)
     where TDbMigrator : IProjectMetadata, new()
     where TProject : IProjectMetadata, new()
 {
@@ -103,98 +105,98 @@ IResourceBuilder<ProjectResource> AddDotNetProject<TDbMigrator, TProject>(
 var localizationService = AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_LocalizationService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_LocalizationService>(
-    builder:            builder, 
-    servicePrefix:      "Localization",
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30030,
-    portName:           "localization")
+    builder: builder,
+    servicePrefix: "Localization",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30030,
+    portName: "localization")
     .WithHttpHealthCheck("/health/service");
 
 // AuthServer
 var authServer = AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_AuthServer_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_AuthServer>(
-    builder:            builder,
-    servicePrefix:      "Auth",
-    serviceSuffix:      "Server",
-    migratorSuffix:     "Migrator",
-    port:               44385,
-    portName:           "auth", 
-    waitProject:        localizationService);
+    builder: builder,
+    servicePrefix: "Auth",
+    serviceSuffix: "Server",
+    migratorSuffix: "Migrator",
+    port: 44385,
+    portName: "auth",
+    waitProject: localizationService);
 
 // AdminService
 var adminService = AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_AdminService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_AdminService>(
-    builder:            builder,
-    servicePrefix:      "Admin",
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30010,
-    portName:           "admin",
-    waitProject:        authServer);
+    builder: builder,
+    servicePrefix: "Admin",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30010,
+    portName: "admin",
+    waitProject: authServer);
 
 // IdentityService
 AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_AuthServer_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_IdentityService>(
-    builder:            builder,
-    servicePrefix:      "Identity",
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30015,
-    portName:           "identity",
-    waitProject:        authServer);
+    builder: builder,
+    servicePrefix: "Identity",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30015,
+    portName: "identity",
+    waitProject: authServer);
 
 // TaskService
 var taskService = AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_TaskService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_TaskService>(
-    builder:            builder, 
-    servicePrefix:      "Task", 
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30040, 
-    portName:           "task", 
-    waitProject:        adminService)
+    builder: builder,
+    servicePrefix: "Task",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30040,
+    portName: "task",
+    waitProject: adminService)
     .WithHttpHealthCheck("/health/service");
 
 // MessageService
 AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_MessageService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_MessageService>(
-    builder:            builder, 
-    servicePrefix:      "Message",
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator", 
-    port:               30020, 
-    portName:           "message", 
-    waitProject:        taskService);
+    builder: builder,
+    servicePrefix: "Message",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30020,
+    portName: "message",
+    waitProject: taskService);
 
 // WebhookService
 AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_WebhookService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_WebhookService>(
-    builder:            builder, 
-    servicePrefix:      "Webhook",
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30045,
-    portName:           "webhook", 
-    waitProject:        taskService);
+    builder: builder,
+    servicePrefix: "Webhook",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30045,
+    portName: "webhook",
+    waitProject: taskService);
 
 // PlatformService
 AddDotNetProject<
     Projects.LINGYUN_Abp_MicroService_PlatformService_DbMigrator,
     Projects.LINGYUN_Abp_MicroService_PlatformService>(
-    builder:            builder, 
-    servicePrefix:      "Platform", 
-    serviceSuffix:      "Service",
-    migratorSuffix:     "Migrator",
-    port:               30025, 
-    portName:           "platform",
-    waitProject:        adminService);
+    builder: builder,
+    servicePrefix: "Platform",
+    serviceSuffix: "Service",
+    migratorSuffix: "Migrator",
+    port: 30025,
+    portName: "platform",
+    waitProject: adminService);
 
 // WeChatService
 builder.AddProject<Projects.LINGYUN_Abp_MicroService_WeChatService>("WeChatService")

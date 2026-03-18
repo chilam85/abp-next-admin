@@ -1,11 +1,16 @@
 ﻿using DotNetCore.CAP;
+using Elastic.Clients.Elasticsearch.Core.Reindex;
 using LINGYUN.Abp.DataProtectionManagement;
+using LINGYUN.Abp.Demo.Books;
+using LINGYUN.Abp.Demo.Localization;
+using LINGYUN.Abp.Demo.Permissions;
 using LINGYUN.Abp.Localization.CultureMap;
 using LINGYUN.Abp.LocalizationManagement;
 using LINGYUN.Abp.Saas;
 using LINGYUN.Abp.Serilog.Enrichers.UniqueId;
 using LINGYUN.Abp.TextTemplating;
 using LINGYUN.Abp.Wrapper;
+//using LINGYUN.Abp.Exporter.MiniExcel;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -420,6 +425,49 @@ public partial class AdminServiceModule
         {
             options.IsEnabled = true;
         });
+    }
+
+    /// <summary>
+    /// 配置数据导出
+    /// </summary>
+    //private void ConfigureExporter()
+    //{
+    //    Configure<AbpExporterMiniExcelOptions>(options =>
+    //    {
+    //        options.MapExportSetting(typeof(BookDto), config =>
+    //        {
+    //            config.DynamicColumns = new[]
+    //            {
+    //                // 忽略某些字段
+    //                new DynamicExcelColumn(nameof(BookDto.AuthorId)){ Ignore = true },
+    //                new DynamicExcelColumn(nameof(BookDto.LastModificationTime)){ Ignore = true },
+    //                new DynamicExcelColumn(nameof(BookDto.LastModifierId)){ Ignore = true },
+    //                new DynamicExcelColumn(nameof(BookDto.CreationTime)){ Ignore = true },
+    //                new DynamicExcelColumn(nameof(BookDto.CreatorId)){ Ignore = true },
+    //                new DynamicExcelColumn(nameof(BookDto.Id)){ Ignore = true },
+    //            };
+    //        });
+    //    });
+    //}
+
+    /// <summary>
+    /// 配置数据权限
+    /// </summary>
+    private void ConfigureEntityDataProtected()
+    {
+        Configure<DataProtectionManagementOptions>(options =>
+        {
+            options.AddEntities(typeof(DemoResource),
+                new[]
+                {
+                    typeof(Book),
+                });
+        });
+
+        //Configure<AbpPermissionOptions>(options =>
+        //{
+        //    options.DefinitionProviders.Add<DemoPermissionDefinitionProvider>();
+        //});
     }
 
     private void PreConfigureWrapper()

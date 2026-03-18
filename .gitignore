@@ -42,3 +42,4 @@ yarn-error.log*
 *.njsproj
 *.sw*
 /apps/vben5/.chrome-debug,
+InitSql

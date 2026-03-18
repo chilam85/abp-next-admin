@@ -35,7 +35,7 @@ public class AdminServiceDbMigratorHostedService : IHostedService
 
         await application.InitializeAsync();
 
-        await application
+            await application
             .ServiceProvider
             .GetRequiredService<AdminServiceDbMigrationService>()
             .CheckAndApplyDatabaseMigrationsAsync();

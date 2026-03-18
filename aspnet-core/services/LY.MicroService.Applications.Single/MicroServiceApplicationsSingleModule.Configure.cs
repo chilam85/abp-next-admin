@@ -97,6 +97,9 @@ public partial class MicroServiceApplicationsSingleModule
                     .DisableTransportSecurityRequirement();
 
                 builder.AddProductionEncryptionAndSigningCertificate(configuration["App:SslFile"], configuration["App:SslPassword"]);
+
+                builder.AllowPasswordFlow();      // 启用 password grant
+                builder.AllowRefreshTokenFlow();  // 如果需要刷新 Token
             });
         }
         else
@@ -133,6 +136,9 @@ public partial class MicroServiceApplicationsSingleModule
                 // 禁用https
                 builder.UseAspNetCore()
                     .DisableTransportSecurityRequirement();
+
+                builder.AllowPasswordFlow();      // 启用 password grant
+                builder.AllowRefreshTokenFlow();  // 如果需要刷新 Token
             });
         }
     }

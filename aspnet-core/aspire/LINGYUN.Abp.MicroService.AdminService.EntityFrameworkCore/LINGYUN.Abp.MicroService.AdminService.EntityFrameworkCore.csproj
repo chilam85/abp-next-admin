@@ -30,6 +30,9 @@
 		<ProjectReference Include="..\..\modules\auditing\LINGYUN.Abp.Auditing.Application.Contracts\LINGYUN.Abp.Auditing.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\modules\caching-management\LINGYUN.Abp.CachingManagement.Application.Contracts\LINGYUN.Abp.CachingManagement.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\modules\data-protection\LINGYUN.Abp.DataProtectionManagement.Application.Contracts\LINGYUN.Abp.DataProtectionManagement.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.Application.Contracts\LINGYUN.Abp.Demo.Application.Contracts.csproj" />
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.Domain\LINGYUN.Abp.Demo.Domain.csproj" />
+		<ProjectReference Include="..\..\modules\demo\LINGYUN.Abp.Demo.EntityFrameworkCore\LINGYUN.Abp.Demo.EntityFrameworkCore.csproj" />
 		<ProjectReference Include="..\..\modules\feature-management\LINGYUN.Abp.FeatureManagement.Application.Contracts\LINGYUN.Abp.FeatureManagement.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\modules\gdpr\LINGYUN.Abp.Gdpr.Application.Contracts\LINGYUN.Abp.Gdpr.Application.Contracts.csproj" />
 		<ProjectReference Include="..\..\modules\identity\LINGYUN.Abp.Identity.Application.Contracts\LINGYUN.Abp.Identity.Application.Contracts.csproj" />

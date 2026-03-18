@@ -4,6 +4,8 @@ using LINGYUN.Abp.CachingManagement;
 using LINGYUN.Abp.Data.DbMigrator;
 using LINGYUN.Abp.DataProtectionManagement;
 using LINGYUN.Abp.DataProtectionManagement.EntityFrameworkCore;
+using LINGYUN.Abp.Demo;
+using LINGYUN.Abp.Demo.EntityFrameworkCore;
 using LINGYUN.Abp.FeatureManagement;
 using LINGYUN.Abp.Gdpr;
 using LINGYUN.Abp.Identity;
@@ -71,7 +73,9 @@ namespace LINGYUN.Abp.MicroService.AdminService;
     typeof(AbpLocalizationManagementEntityFrameworkCoreModule),
     typeof(AbpTextTemplatingEntityFrameworkCoreModule),
     typeof(AbpEntityFrameworkCorePostgreSqlModule),
-    typeof(AbpDataDbMigratorModule)
+    typeof(AbpDataDbMigratorModule),
+    typeof(AbpDemoEntityFrameworkCoreModule),
+    typeof(AbpDemoApplicationContractsModule)
     )]
 public class AdminServiceMigrationsEntityFrameworkCoreModule : AbpModule
 {

@@ -1,7 +1,9 @@
 ﻿using LINGYUN.Abp.Demo.Localization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
+using Volo.Abp.Authorization;
 using Volo.Abp.Modularity;
 
 namespace LINGYUN.Abp.Demo;
@@ -24,5 +26,7 @@ public class AbpDemoHttpApiModule : AbpModule
                 typeof(DemoResource),
                 typeof(AbpDemoApplicationContractsModule).Assembly);
         });
+
+        //PreConfigure<AbpAuthorizationOptions>(options => options.UsePermissionPolicies = true);
     }
 }

@@ -1,5 +1,7 @@
 ﻿<Project>
 	<PropertyGroup>
+		<!--<TargetFramework>netstandard2.0;netstandard2.1;net8.0;net9.0;net10.0</TargetFramework>
+		<LangVersion>latest</LangVersion>-->
 		<IsTestProject Condition="$(MSBuildProjectFullPath.Contains('test')) and ($(MSBuildProjectName.EndsWith('.Tests')) or $(MSBuildProjectName.EndsWith('.TestBase')))">true</IsTestProject>
 	</PropertyGroup>
 

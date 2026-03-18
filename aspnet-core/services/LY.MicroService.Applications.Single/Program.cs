@@ -54,7 +54,7 @@ if (app.Environment.IsDevelopment())
 app.UseCorrelationId();
 app.MapAbpStaticAssets();
 app.UseRouting();
-app.UseCors();
+app.UseCors(); // 必须在 UseAuthentication 之前
 app.UseAuthentication();
 app.UseAbpOpenIddictValidation();
 app.UseMultiTenancy();
@@ -74,5 +74,18 @@ app.UseAuditing();
 app.UseAbpSerilogEnrichers();
 app.UseConfiguredEndpoints();
 app.UseHttpActivities();
+app.MapRazorPages(); // 启用 /Account/Login
+//app.MapControllers();
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapRazorPages(); //手动添加这行
+//    endpoints.MapControllers();
+//});
+app.Use(async (ctx, next) =>
+{
+    var roles = ctx.User.Claims.Where(c => c.Type == "role").Select(c => c.Value).ToList();
+    Console.WriteLine(">>> ROLES IN TOKEN: " + string.Join(", ", roles));
+    await next();
+});
 
 await app.RunAsync();

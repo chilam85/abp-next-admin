@@ -6,11 +6,13 @@ using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Content;
+using Volo.Abp.Authorization.Permissions;
 
 namespace LINGYUN.Abp.Demo.Books;
 
 [Controller]
-[Authorize(DemoPermissions.Books.Default)]
+//[Authorize(DemoPermissions.Books.Default)]
+//[RequiresPermission(DemoPermissions.Books.Default)]
 [RemoteService(Name = DemoRemoteServiceConsts.RemoteServiceName)]
 [Area(DemoRemoteServiceConsts.ModuleName)]
 [Route($"api/{DemoRemoteServiceConsts.ModuleName}/books")]
@@ -85,5 +87,36 @@ public class BookController : AbpControllerBase, IBookAppService
     public virtual Task<EntityTypeInfoModel> GetEntityRuleAsync(EntityTypeInfoGetModel input)
     {
         return _service.GetEntityRuleAsync(input);
+    }
+
+    [HttpGet("debug/permissions")]
+    [Authorize]
+    public async Task<IActionResult> DebugPermissions()
+    {
+        var permissionChecker = LazyServiceProvider.LazyGetRequiredService<IPermissionChecker>();
+
+        var permissions = new[]
+        {
+            "SettingManagement.Definition",
+            "SettingManagement.Definition.Create",
+            "Demo.Books",
+            "Demo.Books.Create"
+            // 添加更多需要检查的权限
+        };
+
+        var result = new Dictionary<string, bool>();
+        foreach (var permission in permissions)
+        {
+            result[permission] = await permissionChecker.IsGrantedAsync(permission);
+        }
+
+        return Ok(new
+        {
+            User = User.Identity.Name,
+            IsAuthenticated = User.Identity.IsAuthenticated,
+            AuthenticationType = User.Identity.AuthenticationType,
+            Claims = User.Claims.Select(c => new { c.Type, c.Value }),
+            Permissions = result
+        });
     }
 }

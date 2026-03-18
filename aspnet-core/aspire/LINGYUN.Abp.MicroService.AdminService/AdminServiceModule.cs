@@ -9,6 +9,7 @@ using LINGYUN.Abp.CachingManagement.StackExchangeRedis;
 using LINGYUN.Abp.Claims.Mapping;
 using LINGYUN.Abp.Data.DbMigrator;
 using LINGYUN.Abp.DataProtectionManagement;
+using LINGYUN.Abp.Demo;
 using LINGYUN.Abp.Emailing.Platform;
 using LINGYUN.Abp.EventBus.CAP;
 using LINGYUN.Abp.ExceptionHandling.Emailing;
@@ -41,6 +42,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement.Identity;
 using Volo.Abp.PermissionManagement.OpenIddict;
 using Volo.Abp.Swashbuckle;
+using Volo.Abp.Authorization;
 
 namespace LINGYUN.Abp.MicroService.AdminService;
 
@@ -83,6 +85,10 @@ namespace LINGYUN.Abp.MicroService.AdminService;
     typeof(AbpPermissionManagementDomainOrganizationUnitsModule), // 组织机构权限管理
     typeof(AbpPermissionManagementDomainIdentityModule),
     typeof(AbpPermissionManagementDomainOpenIddictModule),
+    //Demo
+    typeof(AbpDemoApplicationModule),
+    typeof(AbpDemoHttpApiModule),    
+    //typeof(AbpDemoApplicationContractsModule),
 
     // 重写模板引擎支持外部本地化
     typeof(AbpTextTemplatingScribanModule),
@@ -114,6 +120,8 @@ public partial class AdminServiceModule : AbpModule
         PreConfigureFeature();
         PreConfigureApp(configuration);
         PreConfigureCAP(configuration);
+
+        //PreConfigure<Volo.Abp.Authorization.AbpAuthorizationOptions>(options => options.UsePermissionPolicies = true);
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -124,6 +132,7 @@ public partial class AdminServiceModule : AbpModule
         ConfigureWrapper();
         ConfigureLocalization();
         ConfigureVirtualFileSystem();
+        ConfigureEntityDataProtected();
         ConfigureTextTemplating();
         ConfigureSettingManagement();
         ConfigureFeatureManagement();
@@ -140,5 +149,10 @@ public partial class AdminServiceModule : AbpModule
         ConfigureSwagger(context.Services, configuration);
         ConfigureDistributedLocking(context.Services, configuration);
         ConfigureSecurity(context.Services, configuration, hostingEnvironment.IsDevelopment());
+
+        //Configure<Volo.Abp.Authorization.AbpAuthorizationOptions>(options =>
+        //{
+        //    options.EnableAuthorizationRequestLogging = true;  // 启用授权日志
+        //});
     }
 }
